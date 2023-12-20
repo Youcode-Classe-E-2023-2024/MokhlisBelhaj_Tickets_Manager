@@ -513,6 +513,7 @@
     $(document).ready(function() {
         fetchDataAndPopulate();
     });
+    setInterval(fetchDataAndPopulate, 1000);
 </script>
 
 
