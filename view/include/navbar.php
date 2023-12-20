@@ -1,9 +1,9 @@
 <!-- component -->
 <nav class=" bg-white w-full flex relative justify-between items-center font-bold text-black mx-auto px-8 h-20">
 
-    <div class="  flex-grow-0 justify-start px-2">
+    <a href="<?= URLROOT?>" class="  flex-grow-0 justify-start px-2">
         Helpdesk-Ticketing
-    </div>
+</a>
     <div class="  flex-grow-0 text-2xl justify-start px-2">
        Welcome <?php echo  ucwords($_SESSION['name']);
        ?>

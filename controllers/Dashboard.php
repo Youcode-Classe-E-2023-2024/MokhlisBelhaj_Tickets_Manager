@@ -5,12 +5,15 @@ class Dashboard extends controller
     protected $tags;
     protected $priorite;
     protected $ticket;
+    protected $comm;
     public function __construct()
     {
         $this->user = $this->model('Users');
         $this->tags = $this->model('Tags');
         $this->priorite = $this->model('priorite');
         $this->ticket = $this->model('Ticket');
+        $this->comm = $this->model('commentaires');
+
 
         if (empty($_SESSION)) {
             $data = [
@@ -33,6 +36,30 @@ class Dashboard extends controller
 
 
         $this->view('index', $data);
+    }
+    
+    public function detail($id)
+    {
+        $detail= $this->ticket->detailTicket($id);
+      
+      
+        $tag= $detail->tag_names;
+        $tag=explode(',',$tag);
+        $user= $detail->assigned_user_names;
+        $user=explode(',',$user);
+        $iduser= $detail->assignee_id;
+        $iduser=explode(',',$iduser);
+      
+        $data=[
+            'detail'=>$detail,
+            'tag'=>$tag,
+            'user'=>$user,
+            'iduser'=>$iduser,
+    
+    ];
+
+        
+        $this->view('detail',$data);
     }
     public function add()
     {
@@ -79,6 +106,26 @@ class Dashboard extends controller
             }
         }
     }
+    public function getCommentaire($id){
+        $commen=$this->comm->getcommentaires($id);
+        print_r( json_encode($commen));
+        
+    }
+    
+    public function insertCommentaire(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contenu'])) {
+            $data = [
+                'id_ticktet' => $_POST['id_ticktet'],
+                'contenu' => $_POST['contenu'], // Change 'body' to match your textarea name attribute
+            ];
+    
+            $this->comm->insertcommentaires($data);
+    
+            // Retrieve and return the updated comments (you may want to format it as needed)
+            $comments = $this->comm->getcommentaires($data['id_ticktet']);
+            echo json_encode($comments);
+        }
+    }
     public function getticket() {
         if($_POST['filter']=='1'){
            $data = $this->ticket->alltiket();
@@ -86,11 +133,11 @@ class Dashboard extends controller
         }elseif($_POST['filter']== '2'){
         
             $this->ticket->createdtiket();
-            die();
+            
 
-        }else{
+        }elseif($_POST['filter']== '3'){
             $this->ticket->assignTiket();
-            die();
+           
         }
         
 

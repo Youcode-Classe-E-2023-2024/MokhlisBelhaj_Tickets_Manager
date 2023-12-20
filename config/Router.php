@@ -2,7 +2,7 @@
 class Router
 {
     protected $currentController ;
-    protected $currentMethod ;
+    protected $currentMethod='index' ;
     protected $params = [];
 
     public function __construct()
@@ -12,7 +12,6 @@ class Router
         
         if ($urlData['controller']=='index.php' ) { 
             $urlData['controller']  = 'dashboard';
-            $urlData['method'] = 'index';
         } 
      
         
