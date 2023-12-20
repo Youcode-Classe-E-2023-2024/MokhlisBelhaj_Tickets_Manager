@@ -201,28 +201,10 @@
                 </div>
             </div>
         </div>
-        <div id="resultContainer"></div>
-        <div class="grid grid-cols-1 gap-4">
+
+        <div class="grid grid-cols-1 gap-4" id="resultContainer">
             <!-- Card to do  -->
-            <div class="backdrop-blur-sm bg-blue-100 p-6 rounded-md shadow-sm cursor-pointer border-2 border-blue-500  hover:border-blue-900 hover:border-2 transition-colors duration-300">
-                <div class="flex items-center">
-                    <div class=" bg-blue-200 flex p-2 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class=" text-gray-500 fill-blue-500" width="34" height="34" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 2.5a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM9 4h2v5H9zm0 7h2v2H9z" clip-rule="evenodd"></path>
-                        </svg>
 
-                    </div>
-                    <h2 class="text-3xl font-semibold ">Project 1</h2>
-                </div>
-
-                <p class="text-gray-700">Description of Project 2 goes here. You can provide more details about the project.</p>
-                <div class="flex justify-between sm:mt-4 lg:mt-4 xl:mt-4">
-                    <button class="bg-blue-500 py-2 px-1 m-1 w-40 text-white  rounded-md hover:bg-bleu-600">to do </button>
-                    <svg width="34" height="34" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path class="fill-red-500" d="m 8 0 c -0.257812 0 -0.511719 0.0976562 -0.707031 0.292969 l -1.707031 1.707031 h -2.585938 c -0.550781 0 -1 0.449219 -1 1 v 2.585938 l -1.707031 1.707031 c -0.3906252 0.390625 -0.3906252 1.023437 0 1.414062 l 1.707031 1.707031 v 2.585938 c 0 0.550781 0.449219 1 1 1 h 2.585938 l 1.707031 1.707031 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 l 1.707031 -1.707031 h 2.585938 c 0.550781 0 1 -0.449219 1 -1 v -2.585938 l 1.707031 -1.707031 c 0.390625 -0.390625 0.390625 -1.023437 0 -1.414062 l -1.707031 -1.707031 v -2.585938 c 0 -0.550781 -0.449219 -1 -1 -1 h -2.585938 l -1.707031 -1.707031 c -0.195312 -0.1953128 -0.449219 -0.292969 -0.707031 -0.292969 z m -1 4 h 2 v 5 h -2 z m 1 5.75 c 0.6875 0 1.25 0.5625 1.25 1.25 s -0.5625 1.25 -1.25 1.25 s -1.25 -0.5625 -1.25 -1.25 s 0.5625 -1.25 1.25 -1.25 z m 0 0" fill="#ff7800" />
-                    </svg>
-                </div>
-            </div>
             <!-- Card in progresse -->
             <div class="backdrop-blur-sm bg-yellow-100 p-6 rounded-md shadow-sm cursor-pointer border-2 border-yellow-500 hover:border-yellow-900 hover:border-2 transition-colors duration-300">
                 <div class="flex items-center">
@@ -552,20 +534,7 @@
     document.getElementById("myModal").classList.add("hidden");
     }
 
-    // Function to handle project creation (you can customize this function)
-    // function createProject() {
-    // var projectName = document.getElementById("projectName").value;
-    // var projectDescription = document.getElementById("projectDescription").value;
-    // var inviteFriend = document.getElementById("inviteFriend").value;
 
-    // // Add your logic to handle the project creation here
-    // console.log("Project Name: " + projectName);
-    // console.log("Project Description: " + projectDescription);
-    // console.log("Invite Friend: " + inviteFriend);
-
-    // // Close the modal after handling the creation
-    // closeModal();
-    // }
 
     // Event listener to open the modal when the button is clicked
     document.getElementById("openModalBtn").addEventListener("click", openModal);
@@ -616,33 +585,65 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script>
-$(document).ready(function() {
-    // Event listener for the change event on the select element
-    $('#filterSelect').change(function() {
-        // Get the selected value
-        var selectedValue = $(this).val();
+    <script>
+        $(document).ready(function() {
+            // Event listener for the change event on the select element
+            $('#filterSelect').change(function() {
+                // Get the selected value
+                var selectedValue = $(this).val();
 
-        // Make an AJAX request
-        $.ajax({
-            type: 'POST',
-            url: 'dashboard/getticket',  // Adjust the URL as needed
-            data: { filter: selectedValue },
-            success: function(response) {
-               data = JSON.parse(response)
-                console.log(data);
-                // Handle the response from the server
-                // For example, update the content of the result container
-                $('#resultContainer').html(typeof data);
-            },
-            error: function() {
-                // Handle errors
-                console.log('Error fetching data');
-            }
+                // Make an AJAX request
+                $.ajax({
+    type: 'POST',
+    url: 'dashboard/getticket',
+    data: { filter: selectedValue },
+    success: function(response) {
+        var data = JSON.parse(response);
+        console.log(data);
+
+        // Clear previous content in the result container
+        $('#resultContainer').html('');
+
+        // Iterate through the data and create HTML elements
+        data.forEach(function(ticket) {
+            var tags = ticket.tag_names ? ticket.tag_names.split(',') : [];
+
+            var ticketHtml = `
+                <div class="backdrop-blur-sm bg-${ticket.status_color}-100 p-6 rounded-md shadow-sm cursor-pointer border-2 border-${ticket.status_color}-500 hover:border-${ticket.status_color}-900 hover:border-2 transition-colors duration-300">
+                    <div class="flex justify-between">
+                        <div class="flex items-center">
+                            <div class="bg-${ticket.status_color}-200 flex p-2 rounded-md">
+                               ${ticket.status_svg}
+                            </div>
+                            <h2 class="text-3xl font-semibold">${ticket.ticket_title}</h2>
+                        </div>
+                        <div>
+                            ${tags.map(tag => `<button class="bg-violet-600 py-2 px-1 m-1 w-20 text-white rounded-md hover:bg-green-600">${tag}</button>`).join('')}
+                        </div>
+                    </div>
+                    <p class="text-gray-700">${ticket.ticket_description}</p>
+                    <div class="flex justify-between sm:mt-4 lg:mt-4 xl:mt-4">
+                        <button class="bg-${ticket.status_color}-500 py-2 px-1 m-1 w-40 text-white rounded-md hover:bg-${ticket.status_color}-600">${ticket.status_title}</button>
+                        <svg width="34" height="34" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fill-${ticket.priority_color}-500" d="m 8 0 c -0.257812 0 -0.511719 0.0976562 -0.707031 0.292969 l -1.707031 1.707031 h -2.585938 c -0.550781 0 -1 0.449219 -1 1 v 2.585938 l -1.707031 1.707031 c -0.3906252 0.390625 -0.3906252 1.023437 0 1.414062 l 1.707031 1.707031 v 2.585938 c 0 0.550781 0.449219 1 1 1 h 2.585938 l 1.707031 1.707031 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 l 1.707031 -1.707031 h 2.585938 c 0.550781 0 1 -0.449219 1 -1 v -2.585938 l 1.707031 -1.707031 c 0.390625 -0.390625 0.390625 -1.023437 0 -1.414062 l -1.707031 -1.707031 v -2.585938 c 0 -0.550781 -0.449219 -1 -1 -1 h -2.585938 l -1.707031 -1.707031 c -0.195312 -0.1953128 -0.449219 -0.292969 -0.707031 -0.292969 z m -1 4 h 2 v 5 h -2 z m 1 5.75 c 0.6875 0 1.25 0.5625 1.25 1.25 s -0.5625 1.25 -1.25 1.25 s -1.25 -0.5625 -1.25 -1.25 s 0.5625 -1.25 1.25 -1.25 z m 0 0" fill="#ff7800"></path>
+                    </svg>
+                    </div>
+                </div>
+            `;
+
+            // Append the ticket HTML to the result container
+            $('#resultContainer').append(ticketHtml);
         });
-    });
+    },
+    error: function() {
+        // Handle errors
+        console.log('Error fetching data');
+    }
 });
-</script>
+
+            });
+        });
+    </script>
 
 
 
