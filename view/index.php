@@ -10,12 +10,9 @@
                         <div class="flex flex-row -mx-3">
                             <div class="flex-none w-2/3 max-w-full px-3">
                                 <div>
-                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Money</p>
-                                    <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
-                                    <p class="mb-0 dark:text-white dark:opacity-60">
-                                        <span class="font-bold leading-normal text-sm text-emerald-500">+55%</span>
-                                        since yesterday
-                                    </p>
+                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">tache</p>
+                                    <h5 class="mb-2 font-bold dark:text-white"><?php echo $data['contTicket'] ?></h5>
+
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
@@ -34,12 +31,9 @@
                         <div class="flex flex-row -mx-3">
                             <div class="flex-none w-2/3 max-w-full px-3">
                                 <div>
-                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Today's Users</p>
-                                    <h5 class="mb-2 font-bold dark:text-white">2,300</h5>
-                                    <p class="mb-0 dark:text-white dark:opacity-60">
-                                        <span class="font-bold leading-normal text-sm text-emerald-500">+3%</span>
-                                        since last week
-                                    </p>
+                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm"> Users</p>
+                                    <h5 class="mb-2 font-bold dark:text-white"><?php echo $data['contUsers'] ?></h5>
+
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
@@ -52,68 +46,21 @@
                 </div>
             </div>
 
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">New Clients</p>
-                                    <h5 class="mb-2 font-bold dark:text-white">+3,462</h5>
-                                    <p class="mb-0 dark:text-white dark:opacity-60">
-                                        <span class="font-bold leading-normal text-red-600 text-sm">-2%</span>
-                                        since last quarter
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                                    <i class="ni ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p class="mb-0 font-sans font-semibold leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Sales</p>
-                                    <h5 class="mb-2 font-bold dark:text-white">$103,430</h5>
-                                    <p class="mb-0 dark:text-white dark:opacity-60">
-                                        <span class="font-bold leading-normal text-sm text-emerald-500">+5%</span>
-                                        than last month
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                <div class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
-                                    <i class="ni ni-cart text-lg relative top-3.5 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </section>
     <div class="w-11/12  backdrop-blur-sm bg-white/40 p-6 rounded-lg shadow-sm border-violet-200 border">
         <div class="w-full flex justify-between items-center p-3">
-            <h2 class="text-xl font-semibold">My Project</h2>
+            <h2 class="text-xl font-semibold">Tickets</h2>
             <button id="openModalBtn" class="flex items-center bg-gradient-to-r from-violet-300 to-indigo-300 hover:from-violet-900 hover:to-indigo-900  border border-fuchsia-00 hover:border-violet-100 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300">
                 <svg class="w-4 h-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
-                <p class="text-white">New Project</p>
+                <p class="text-white">New Ticket</p>
             </button>
         </div>
         <div class="w-full flex justify-center p-1 mb-4">
             <div class="relative  flex justify-between w-full">
-                <input type="search" class="w-1/3 backdrop-blur-sm bg-white/20 py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300" placeholder="Search...">
                 <select name="filter" id="filterSelect" class="w-60 backdrop-blur-sm bg-white/20 py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
                     <option value="1" selected>All</option>
                     <option value="2">My creation</option>
@@ -420,14 +367,14 @@
                 // Handle success response
                 console.log(response);
                 closeModal();
-                $('input[name="selected_tags[]"]:checked').map(function(){
+                $('input[name="selected_tags[]"]:checked').map(function() {
                     this.checked = false;
                 });
-                $('input[name="selected_users[]"]:checked').map(function(){
+                $('input[name="selected_users[]"]:checked').map(function() {
                     this.checked = false;
                 });
-               
-                
+
+
 
             },
             error: function(error) {
@@ -439,17 +386,12 @@
 
     function closeModal() {
         document.getElementById("myModal").classList.add("hidden");
-       
+
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    window.onload = function() {
-        console.log('hello')
-        test = Document.getElementById('filterSelect')
-        console.log(test.value)
-    };
     $(document).ready(function() {
         // Event listener for the change event on the select element
         $('#filterSelect').change(function() {
@@ -474,7 +416,7 @@
                     data.forEach(function(ticket) {
                         var tags = ticket.tag_names ? ticket.tag_names.split(',') : [];
 
-                        var ticketHtml =`
+                        var ticketHtml = `
                 <a href='<?= URLROOT ?>dashboard/detail/${ticket.ticket_id}'>
                 <div class="backdrop-blur-sm bg-${ticket.status_color}-100 p-6 rounded-md shadow-sm cursor-pointer border-2 border-${ticket.status_color}-500 hover:border-${ticket.status_color}-900 hover:border-2 transition-colors duration-300">
                     <div class="flex justify-between">
@@ -512,27 +454,27 @@
     });
     /**********************************************************************************/
     function fetchDataAndPopulate() {
-    var selectedValue = $('#filterSelect').val();
+        var selectedValue = $('#filterSelect').val();
 
-    // Make an AJAX request
-    $.ajax({
-        type: 'POST',
-        url: 'dashboard/getticket',
-        data: {
-            filter: selectedValue
-        },
-        success: function(response) {
-            var data = JSON.parse(response);
-            console.log(data);
+        // Make an AJAX request
+        $.ajax({
+            type: 'POST',
+            url: 'dashboard/getticket',
+            data: {
+                filter: selectedValue
+            },
+            success: function(response) {
+                var data = JSON.parse(response);
+                console.log(data);
 
-            // Clear previous content in the result container
-            $('#resultContainer').html('');
+                // Clear previous content in the result container
+                $('#resultContainer').html('');
 
-            // Iterate through the data and create HTML elements
-            data.forEach(function(ticket) {
-                var tags = ticket.tag_names ? ticket.tag_names.split(',') : [];
+                // Iterate through the data and create HTML elements
+                data.forEach(function(ticket) {
+                    var tags = ticket.tag_names ? ticket.tag_names.split(',') : [];
 
-                var ticketHtml = `
+                    var ticketHtml = `
                 <a href='<?= URLROOT ?>dashboard/detail/${ticket.ticket_id}'>
                 <div class="backdrop-blur-sm bg-${ticket.status_color}-100 p-6 rounded-md shadow-sm cursor-pointer border-2 border-${ticket.status_color}-500 hover:border-${ticket.status_color}-900 hover:border-2 transition-colors duration-300">
                     <div class="flex justify-between">
@@ -556,22 +498,21 @@
                 </div>
                 `;
 
-                // Append the ticket HTML to the result container
-                $('#resultContainer').append(ticketHtml);
-            });
-        },
-        error: function() {
-            // Handle errors
-            console.log('Error fetching data');
-        }
+                    // Append the ticket HTML to the result container
+                    $('#resultContainer').append(ticketHtml);
+                });
+            },
+            error: function() {
+                // Handle errors
+                console.log('Error fetching data');
+            }
+        });
+    }
+
+    // Call the function when the document is ready
+    $(document).ready(function() {
+        fetchDataAndPopulate();
     });
-}
-
-// Call the function when the document is ready
-$(document).ready(function() {
-    fetchDataAndPopulate();
-});
-
 </script>
 
 

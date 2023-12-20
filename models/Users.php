@@ -20,6 +20,18 @@ class Users {
         return false;
        }
        }
+       public function getTotalUsersCount()
+{
+    $this->db->query("SELECT COUNT(*) as user_count FROM users");
+
+    $result = $this->db->single();
+
+    if ($result) {
+        return $result->user_count;
+    } else {
+        return 0; 
+    }
+}
     
        public function signUp($data){
         $this->db->query(
@@ -36,6 +48,7 @@ class Users {
                 return false;
                }
        }
+
    
     
    

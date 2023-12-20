@@ -214,5 +214,18 @@ GROUP BY
     }
 }
 
+public function getTotalTicketCount(){
+    $this->db->query("SELECT COUNT(*) as ticket_count FROM ticket");
+
+    $result = $this->db->single();
+  
+
+    if ($result) {
+        return $result->ticket_count;
+    } else {
+        return 0; 
+    }
+}
+
 
 }

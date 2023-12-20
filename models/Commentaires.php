@@ -8,7 +8,21 @@ class Commentaires
     }
     public function getcommentaires($id)
     {
-        $this->db->query("SELECT `id`, `contenu`, `created_at`, `id_user`, `id_ticktet` FROM `commentaires` WHERE `id_ticktet`=:id_ticktet   ");
+        $this->db->query("SELECT 
+        c.`id`,
+        c.`contenu`,
+        c.`created_at`,
+        c.`id_user`,
+        c.`id_ticktet`,
+        u.`name` AS user_name
+    FROM 
+        `commentaires` c
+    JOIN 
+        `users` u ON c.`id_user` = u.`id`
+    WHERE 
+        c.`id_ticktet` = :id_ticktet;
+        ORDER BY c.`created_at` ASC
+      ");
         $this->db->bind(':id_ticktet', $id);
         $result = $this->db->resultSet();
         if ($result) {

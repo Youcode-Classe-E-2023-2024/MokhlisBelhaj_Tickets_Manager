@@ -58,78 +58,104 @@
             </form>
             <div id="displaycomment" class="w-full max-w-xl bg-white rounded-lg px-4 mb-3 pt-2">
 
-                </div>
             </div>
         </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-        <script>
-            $(document).ready(function() {
-                // Submit form via AJAX
-                $('#commentForm').submit(function(e) {
-                    e.preventDefault(); // Prevent the default form submission
+    <script>
+        $(document).ready(function() {
+            // Submit form via AJAX
+            $('#commentForm').submit(function(e) {
+                e.preventDefault(); // Prevent the default form submission
 
-                    // Get form data
-                    var formData = $(this).serialize();
-                    
+                // Get form data
+                var formData = $(this).serialize();
 
-                    // AJAX request
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= URLROOT ?>dashboard/insertCommentaire',
-                        data: formData,
-                        success: function(response) {
-                            // Handle the success response
-                            var data = JSON.parse(response);
-                            console.log(data);
-                            // $('#displaycomment').html('');
-                            data.forEach(function(commen) {
-                                console.log(commen);
 
-                    
-                
-                                var comentaireHtml =`<div class=" w-full flex flex-col items-end justify-between border border-spacing-1">
+                // AJAX request
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= URLROOT ?>dashboard/insertCommentaire',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the success response
+                        var data = JSON.parse(response);
+                        console.log(data);
+                        $('#displaycomment').html('');
+                        data.forEach(function(commen) {
+                            console.log(commen);
+
+
+
+                            var comentaireHtml = `<div class=" w-full flex flex-col items-end justify-between border border-spacing-1">
                     <div class=" w-full flex items-end">
-                        <div class="text-3xl px-3 ">user:</div>
+                        <div class="text-3xl px-3 ">${commen.user_name}:</div>
                         <div class="">
                         ${commen.contenu}
                         </div>
                     </div>
                     <div class=" justify-end">
-                    ${commen.contenu}
+                    ${commen.created_at}
                     </div>
                 </div>`
 
 
-                            $('#displaycomment').append(comentaireHtml); 
+                            $('#displaycomment').append(comentaireHtml);
                         });
-                          
-                        },
-                        error: function(error) {
-                            // Handle the error response
-                            console.log(error.responseText);
-                        }
-                    });
+
+                    },
+                    error: function(error) {
+                        // Handle the error response
+                        console.log(error.responseText);
+                    }
                 });
-
-                function fetchAllComments() {
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?= URLROOT ?>dashboard/getCommentaire/<?= $data['detail']->ticket_id; ?>',
-                        success: function(response) {
-                            // Handle the success response
-                            $('#displaycomment').html(response); // Update the comment display
-                        },
-                        error: function(error) {
-                            // Handle the error response
-                            console.log(error.responseText);
-                        }
-                    });
-                }
             });
-        </script>
 
-    </div>
+
+          
+
+            fetchAllComments()
+        });
+    
+        function fetchAllComments() {
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= URLROOT ?>dashboard/getCommentaire/<?php echo $data['detail']->ticket_id; ?>',
+                    success: function(response) {
+                        var data = JSON.parse(response);
+                        // Handle the success response
+                        data.forEach(function(commen) {
+                            console.log(commen);
+
+
+
+                            var comentaireHtml = `<div class=" w-full flex flex-col items-end justify-between border border-spacing-1">
+                    <div class=" w-full flex items-end">
+                    <div class="text-3xl px-3 ">${commen.user_name}:</div>
+                    <div class="">
+                    ${commen.contenu}
+                        </div>
+                        </div>
+                        <div class=" justify-end">
+                        ${commen.created_at}
+                    </div>
+                    </div>`
+
+
+                            $('#displaycomment').append(comentaireHtml);
+                        });
+
+                    },
+                    error: function(error) {
+                        // Handle the error response
+                        console.log(error.responseText);
+                    }
+                });
+            }
+    </script>
+
+</div>
 </div>

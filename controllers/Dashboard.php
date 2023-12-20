@@ -27,11 +27,15 @@ class Dashboard extends controller
         $users = $this->user->getUser();
         $tags = $this->tags->gettags();
         $priorites = $this->priorite->getpriorite();
+        $contUsers = $this->user->getTotalUsersCount();
+        $contTicket = $this->ticket->getTotalTicketCount();
 
         $data = [
             'user' => $users,
             'tags' => $tags,
             'priorites' => $priorites,
+            'contUsers'=>$contUsers,
+            'contTicket'=>$contTicket
         ];
 
 
@@ -106,6 +110,7 @@ class Dashboard extends controller
             }
         }
     }
+    
     public function getCommentaire($id){
         $commen=$this->comm->getcommentaires($id);
         print_r( json_encode($commen));
